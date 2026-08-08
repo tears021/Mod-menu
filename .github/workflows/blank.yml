@@ -27,4 +27,3 @@ jobs:
       with:
         name: compiled-so-library
         path: app/src/main/libs/
-        
