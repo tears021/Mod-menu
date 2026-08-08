@@ -9,16 +9,18 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Setup Android NDK
-      uses: nttld/setup-ndk@v1
-      with:
-        ndk-version: r25b
-        add-to-path: true
+    - name: Install Android NDK
+      run: |
+        echo "Installing NDK..."
+        sudo apt-get update
+        sudo apt-get install -y android-sdk-ndk-common
 
     - name: Compile with NDK
       run: |
         cd app/src/main/jni
         ndk-build
+      env:
+        ANDROID_NDK_HOME: /usr/lib/android-sdk/ndk-bundle
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v3
